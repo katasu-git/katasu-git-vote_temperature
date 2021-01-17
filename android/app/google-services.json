@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "266278485839",
+    "firebase_url": "https://vote-temperature.firebaseio.com",
+    "project_id": "vote-temperature",
+    "storage_bucket": "vote-temperature.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266278485839:android:a612a7b65a84e6080f8f3a",
+        "android_client_info": {
+          "package_name": "com.example.vote_temperature"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266278485839-51dili03d8v0o7322h0u2pkh8gvtld5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjayrLKG66byy0u7mcXLqgmn7gwVJpUQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266278485839-51dili03d8v0o7322h0u2pkh8gvtld5r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "266278485839-ft5o4uk6cnv16euimigicib48cn4c0r8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.voteTemperature"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
