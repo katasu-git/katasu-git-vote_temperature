@@ -17,7 +17,7 @@ class ChatPage extends StatefulWidget {
 
 // チャット画面用Widget
 class _ChatPageState extends State<ChatPage> {
-  
+
   String _userVote = "未投票";
 
     void _addUserVote(int vote) {
@@ -132,20 +132,6 @@ class _ChatPageState extends State<ChatPage> {
           ),
         ],
       ),
-      /*
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () async {
-          // 投稿画面に遷移
-          await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) {
-              // 引数からユーザー情報を渡す
-              return AddVotePage(widget.user);
-            }),
-          );
-        },
-      ),
-      */
     );
   }
 }
