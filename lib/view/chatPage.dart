@@ -2,21 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import './addVotePage.dart'; //投稿ページ
 import './loginPage.dart'; //ログインページ
 
-// チャット画面用Widget
-class ChatPage extends StatelessWidget {
-  // 引数からユーザー情報を受け取れるようにする
+// 投稿画面用Widget
+class ChatPage extends StatefulWidget {
+  // 引数からユーザー情報を受け取る
+  // ユーザー情報
   ChatPage(this.user);
   // ユーザー情報
   final User user;
+  @override
+  _ChatPageState createState() => _ChatPageState();
+}
 
+// チャット画面用Widget
+class _ChatPageState extends State<ChatPage> {
+  
+  String _userVote = "未投票";
+
+    void _addUserVote(int vote) {
+      if (vote == 5) {
+        _userVote = "暑い";
+      } else if (vote == 4) {
+        _userVote = "少し暑い";
+      } else if (vote == 3) {
+        _userVote = "快適";
+      } else if (vote == 2) {
+        _userVote = "少し寒い";
+      } else if (vote == 1) {
+        _userVote = "寒い";
+      } else {
+        _userVote = "hello";
+      }
+    }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('チャット'),
+        title: Text('結果'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.close),
@@ -37,12 +61,6 @@ class ChatPage extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          /*
-          Container(
-            padding: EdgeInsets.all(8),
-            child: Text('ログイン情報：${user.email}'),
-          ),
-          */
           Expanded(
             // FutureBuilder
             // 非同期処理の結果を元にWidgetを作れる
@@ -57,10 +75,16 @@ class ChatPage extends StatelessWidget {
                 // データが取得できた場合
                 if (snapshot.hasData) {
                   final docments = snapshot.data.docs;
-                  var sum = docments.length;
+                  var sum = docments.length * 2;
                   var hot = 0;
                   var comfort = 0;
                   var cold = 0;
+
+                  docments.forEach((doc) {
+                    if (widget.user.email == doc["email"]) {
+                      _addUserVote(doc["text"]);
+                    }
+                  });
 
                   docments.forEach((doc) {
                     if (doc["text"] == 5) {
@@ -89,6 +113,7 @@ class ChatPage extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
+                            Text("あなたの投票:" + _userVote),
                             Text("暑い🥵" + perHot.toStringAsFixed(1) + "%"),
                             Text("快適🥰" + perComfort.toStringAsFixed(1) + "%"),
                             Text("寒い🥶" + perCold.toStringAsFixed(1) + "%"),
@@ -98,37 +123,6 @@ class ChatPage extends StatelessWidget {
                     ),
                   );
                 }
-                /*
-                if (snapshot.hasData) {
-                  final List<DocumentSnapshot> documents = snapshot.data.docs;
-                  // 取得した投稿メッセージ一覧を元にリスト表示
-                  return ListView(
-                    children: documents.map((document) {
-                      IconButton deleteIcon;
-                      // 自分の投稿メッセージの場合は削除ボタンを表示
-                      if (document['email'] == user.email) {
-                        deleteIcon = IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () async {
-                            // 投稿メッセージのドキュメントを削除
-                            await FirebaseFirestore.instance
-                                .collection('posts')
-                                .doc(document.id)
-                                .delete();
-                          },
-                        );
-                      }
-                      return Card(
-                        child: ListTile(
-                          title: Text(document['text']),
-                          subtitle: Text(document['email']),
-                          trailing: deleteIcon,
-                        ),
-                      );
-                    }).toList(),
-                  );
-                }
-                */
                 // データが読込中の場合
                 return Center(
                   child: CircularProgressIndicator(),
@@ -138,6 +132,7 @@ class ChatPage extends StatelessWidget {
           ),
         ],
       ),
+      /*
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
@@ -145,11 +140,12 @@ class ChatPage extends StatelessWidget {
           await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
               // 引数からユーザー情報を渡す
-              return AddVotePage(user);
+              return AddVotePage(widget.user);
             }),
           );
         },
       ),
+      */
     );
   }
 }

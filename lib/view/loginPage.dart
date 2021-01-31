@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import './chatPage.dart';  //チャットページ
+import './AddVotePage.dart';  //チャットページ
 
 // ログイン画面用Widget
 class LoginPage extends StatefulWidget {
@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                   await Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) {
                       // 次のページに変数を渡す
-                      return ChatPage(user);
+                      return AddVotePage(user);
                     }),
                   );
                 } catch (e) {
@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                   // チャット画面に遷移＋ログイン画面を破棄
                   await Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) {
-                      return ChatPage(user);
+                      return AddVotePage(user);
                     }),
                   );
                 } catch (e) {

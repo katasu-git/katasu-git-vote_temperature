@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import './ChatPage.dart'; //チャットページ
 
 // 投稿画面用Widget
 class AddVotePage extends StatefulWidget {
@@ -32,14 +33,20 @@ class _AddVotePageState extends State<AddVotePage> {
         .doc() // ドキュメントID自動生成
         .set({'text': _voted, 'email': email, 'date': date});
     // 1つ前の画面に戻る
-    Navigator.of(context).pop();
+    //Navigator.of(context).pop();
+    await Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) {
+        // 引数からユーザー情報を渡す
+        return ChatPage(widget.user);
+      }),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('チャット投稿'),
+        title: Text('投票画面'),
       ),
       body: Center(
         child: Container(
