@@ -14,9 +14,9 @@ class AddVotePage extends StatefulWidget {
 
 class _AddVotePageState extends State<AddVotePage> {
   // 入力した投稿メッセージ
-  String _voted = '未選択';
+  int _voted = 0;
 
-  void _onChanged(String voted) {
+  void _onChanged(int voted) {
     setState(() {
       _voted = voted;
     });
@@ -50,17 +50,27 @@ class _AddVotePageState extends State<AddVotePage> {
               // 投稿メッセージ入力
               RadioListTile(
                   title: Text('暑い'),
-                  value: '暑い',
+                  value: 5,
+                  groupValue: _voted,
+                  onChanged: _onChanged),
+              RadioListTile(
+                  title: Text('少し暑い'),
+                  value: 4,
                   groupValue: _voted,
                   onChanged: _onChanged),
               RadioListTile(
                   title: Text('快適'),
-                  value: '快適',
+                  value: 3,
+                  groupValue: _voted,
+                  onChanged: _onChanged),
+              RadioListTile(
+                  title: Text('少し寒い'),
+                  value: 2,
                   groupValue: _voted,
                   onChanged: _onChanged),
               RadioListTile(
                   title: Text('寒い'),
-                  value: '寒い',
+                  value: 1,
                   groupValue: _voted,
                   onChanged: _onChanged),
             ],
