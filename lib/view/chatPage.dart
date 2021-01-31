@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import './addPostPage.dart';  //投稿ページ
+import './addVotePage.dart';  //投稿ページ
 import './loginPage.dart';  //ログインページ
 
 // チャット画面用Widget
@@ -98,7 +98,7 @@ class ChatPage extends StatelessWidget {
           await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
               // 引数からユーザー情報を渡す
-              return AddPostPage(user);
+              return AddVotePage(user);
             }),
           );
         },
